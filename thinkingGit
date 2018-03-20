@@ -1,0 +1,24 @@
+아래 오류시
+git push origin master
+remote: Permission to ~ denied to ~
+fatal: unable to access 'https://github.com/github_id/studyr.git/': The requested URL returned error: 403
+
+현재 잡혀있는 컨피그의 이름이 달라서 발생
+git config -l
+적어보면 다른 아이디 적혀있음
+
+git remote -v
+git remote set-url origin https://github_id:github_pwd@github.com/github_id/studyr.git
+git push origin master
+다시 하면 됨
+
+///
+git stash는 워킹디렉토리안의 unstaged 파일들을 뺵업한뒤 워킹 디렉토리를 깨끗하게 만듬
+아직 commit하지 않은 변경사항이 있을 떄에 git pull rebase시도하면 커밋하지않은것이 있어 실패함
+따라서 git stash 를 통해 꺠끗하게 만든 뒤 pull 받음
+git stash list 로 조회 가능하며
+git stash show stash이름을 사용하여 원하는 stash 내용 호출가능
+다시 적용하려면
+git stash pop
+을 통해 저장한 내용을 워킹 디렉토리에 적용하고 stash 내역에서 이를 제거
+제거하지않고 적용만 하려면 git stash apply를 사용

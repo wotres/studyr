@@ -22,3 +22,9 @@ git stash show stash이름을 사용하여 원하는 stash 내용 호출가능
 git stash pop
 을 통해 저장한 내용을 워킹 디렉토리에 적용하고 stash 내역에서 이를 제거
 제거하지않고 적용만 하려면 git stash apply를 사용
+
+git push origin master 할 때
+error: failed to push some refs to
+날 경우
+git pull --rebase origin master
+git push origin master

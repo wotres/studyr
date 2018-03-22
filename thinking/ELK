@@ -1,0 +1,97 @@
+엘라스틱 서치
+관계형 DB 기능과 엘라스틱서치 기능
+데이터베이스(Database) => 인덱스(Index)
+테이블(Table) => 타입(Type)
+열(Row) => 도큐먼트(Document)
+행(Column) => 필드(Field)
+스키마(Schema) => 매핑(Mapping)
+
+RestfulAPI 를 통해 단일 ULR을 통한 자원 접근가능
+메서드: GET(조회) PUT(수정) POST(추가) DELETE(삭제)
+curl -X메서드 http://host:port/인덱스/타입/도큐먼트 -d'{데이터}'
+ex)
+curl -XPUT http://localhost:9200/books/book/1 -d'
+{
+    "title": "sample"
+    "author": "Lee"
+    "date" : "2014-05-01",
+    "pages":250
+}
+'
+
+congig/elasticsearch.yml
+클러스터 내부에 노드로 구성
+http 통신 포트는 9200 부터 차례로 증가하고 노드간 데이터 교환 포트는 9300 부터 차례로 증가
+마스터 노드는 클러스터 상태관리하고 데이터 노드는 데이터 입/출력, 검색 수행
+bin/elasticsearch --cluster.name=elasticsearch --node.name=Node1 -node.master=true -node.data=true
+
+검색하는법
+ex) curl localhost:9200:/books/_search?pretty=true
+
+애널라이즈를 이용해 데이터 추가하는법
+curl -XPOST 'http://localhost:9200/books/_analyze?tokenizer=whitespace&filters=lowercase,stop&pretty' -d 'Around the World'
+=> 위 명령어를 통해 whitespace를 통해 분리하고 filters를 통해 소문자로 바꿔줌
+
+엘라스틱 서치는 여러개의 노드로 구성되는 분산 시스템
+노드는 데이터를 색인하고 검색을 수행하는 단위 프로세스
+각 노드는 1개이상의 데이터 원본과 복사본을 서로 다른 위치에 나누어 저장
+기본적으로 모든 필드를 색인 후 JSON 구조로 저장
+최소 최대 메모리 사용량 지정 가능하며 메모리 용량 변경에 들어가는 불필요한 오버헤드 방지차원에서 동일하게 지정
+
+///
+로그스태시
+로그스태시 표준 입출력
+codec은 이벤트의 데이터 표현을 변경하는 플러그
+stadard.conf 파일 json => json
+input {
+    stdin { codec => json }
+}
+output {
+    stdpit { codec => json }
+}
+
+엘라스틱 서치 출력
+elasticsearch.conf
+output{
+  elasticsearch {
+    cluster => "elasticsearch"
+    node_name => "node-logstash"
+    index => "texts"
+    document_type => "test-%{+YYYY.MM.dd}"
+    id => "%{id}"
+  }
+}
+
+elasticsearch.conf
+input{
+  stdin{ }
+}
+output{
+  elasticsearch {
+    index => "logstash"
+  }
+}
+아래 명령어로 실행
+bin/logstash -f example/elastic.conf
+
+curl -XGET 'localhost:9200/logstash/_serch?pretty' 를 통해 들어온 단어들 출력
+
+필터 적은 순서대로 수행
+filter {
+  grok {
+    match => {
+    "message" =>
+      "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}"
+    }
+  }
+}
+
+로그스태시는 데이터의 입력, 변환, 출력을 실시간 파이프라인으로 처리하는 오픈 소스 데이터 수집 엔진
+다양한 입력소스에서 동시에 데이터를 수집하여 변환한 후 자주 사용하는 다양한 스태시(Stash)-보관소로 전송
+JAVA 8에서 동작
+java -version 으로 확인
+
+
+///
+키바나
+기준 index, time-field 설정

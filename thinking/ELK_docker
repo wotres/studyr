@@ -1,0 +1,10 @@
+docker pull sebp/elk
+docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
+
+5601 : kibana web interface
+9200 : elasticsearch JSON interface
+5044 : logstach Beats interface, receives logs from Beats such as Filebeat
+
+docker start elk
+로 실행가능하며
+^C 로 스탑가능

@@ -2,8 +2,7 @@
 git push origin master
 remote: Permission to ~ denied to ~
 fatal: unable to access 'https://github.com/github_id/studyr.git/': The requested URL returned error: 403
-
-현재 잡혀있는 컨피그의 이름이 달라서 발생
+-> 현재 잡혀있는 컨피그의 이름이 달라서 발생
 git config -l
 적어보면 다른 아이디 적혀있음
 
@@ -245,4 +244,17 @@ git tag -a 1.0 -m "first release" master
 머지의 기준은 현재 있는곳으로 끌고 오는거
 
 
+
+=======
+아래 오류시
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+    git pull <remote> <branch>
+If you wish to set tracking information for this branch you can do so with:
+    git branch --set-upstream-to=origin/<branch> master
+
+위에서 시킨 대로
+git branch --set-upstream-to=origin/master master
+로컬에 branch가 생성되었으니 그걸 리모트 branch를 추적하게 해줌
 

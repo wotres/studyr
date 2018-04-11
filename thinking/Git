@@ -28,3 +28,221 @@ error: failed to push some refs to
 날 경우
 git pull --rebase origin master
 git push origin master
+
+깃 브랜치 제거 하는법
+git branch -d 브랜치명
+
+git branch -d 브랜치명 할떄 오류
+error: Cannot delete branch '브랜치명' checked out at '위치'
+브랜치를 지울려는 브랜치로 놔두고 시도해서 나는 에러
+git branch 를 통해 다른 브랜치로 옮겨간 뒤 시행
+
+git rm --cached 파일이름
+add 잘못한거 제거
+
+///
+깃은 버젼 관리 시스템
+git init : 현재 디렉토리에 작업을 진행하겠다. 깃에 알려줌, 저장소 생성
+git clone : 현재 디렉토리에 clone 이하에 있는 파일들을 가져와 폴더를 생성하겠다.
+
+git status
+버젼관리가 되고 있는 녀석과 아닌 녀석을 구분
+git add 를 통해 버젼관리할것 을 록해줌
+
+git config --global user.name 이름
+을 통해 누가 작업했는지 알려줌
+
+git log 를 통해 누가 반영했는 지 확인 가능
+git log -p 를 넣으면 커밋들 차이에 다른 점을 같이 보여줌
+git log id 를 넣으면 넣은 아이디 전의 커밋들만 보여줌
+
+git diff 커밋아이디1 커밋아이디2
+
+git reset 아이디 --hard
+아이디 이후에 사용한 커밋들 다 날림
+
+git log --branches --decorate --graph --oneline
+현재 브랜치들의 커밋 상황 비교
+
+HEAD 는 현재 체크아웃된 브랜치를 말 해줌
+
+git checkout master 로 한뒤에
+git merge 브랜치
+브랜치의 내용을 마스터에 옮김
+반대도 해줘야 브랜치도 마스터 같아짐
+
+git branch -d 브랜치명
+깃 브랜치 삭제
+
+git checkout -b 브랜치명
+만들고 이동
+
+master에서 브랜치1 브랜치2 순서대로 따고 난뒤에 브랜치2를 머지하면
+fast-forward 와같은 경우가 뜨며
+master는 브랜치 2 의 위치에 오게 됨(수정된 녀석 반영)
+별도의 커밋 반영안됨
+
+git stash 파일
+하면 수정한 파일이 status 에 나타나지 않게 해줌
+
+git stash apply
+숨긴 파일 다시 나타나게 해줌
+
+git stash list
+숨긴 파일 리스트 나타내줌
+
+git reset --hard HEAD
+복원. 하지만 stash 한건 안지워짐
+
+git stash drop
+가장 최근 stash 한 거 사라짐
+
+git stash pop
+스태쉬 내려주고 삭제까지 가능
+
+git commit -am 깃
+에드하고 반영
+
+git checkout temp
+git merge master
+하면 temp에 master 가 병합됨
+이떄 같은 주제를 병합하면 오류남 auto-merging common.txt
+열어서 HEAD 표시된 부분이 우리가 보고 ㅣㅇㅆ는곳,
+아래는 받은 부분
+
+git reflog
+깃 일어난 행위 나
+
+git checkout 로그 찍은 커밋아이디
+특정 커밋 된 부분을 직접 가르키는 상태
+
+git diff
+워킹 디렉토리랑 현재 디렉토리 비교
+
+git config --global merge.tool kdiff3
+git config --global merge.tool bc
+비교하는 프로그램 지정
+
+cat
+머지 에러난 경우 위 명령어로 파일 본 뒤 에 수정
+
+git init --bare remote
+리모트라는 디렉토리를 만들고 작업할수 있는 워킹디렉토리 없이 작업없는 깃 저장소 생성
+
+git remote add pwd
+현재 디렉토리 추가
+
+git push --set-upstream origin master
+앞으로 푸쉬할떄는 오리진의 마스터에 하겠다
+
+git remote add origin 주소
+오리진이란 이름으로 아래 깃허브의 원격저장소에 현재 폴더를 연결하겠다
+
+git remote remove 이름
+이름 리모트를 지움
+
+git push -u origin master
+처음에 -u 는 한번만 쓰면 됨 -> 오리진이랑 마스터를 연결시킴
+git push 하면 이제 저기 연결됨
+
+git commit --amend
+커밋 메시지를 바꿈(푸쉬전까지)
+
+ssh
+Secure Shell
+로그인 안하고 사용가능
+
+ssh-keygen
+해당경로에 비밀번호 저장됨
+cd ~/.ssh
+로 이동
+id_rsa : private key
+id_rsa.pub : public key
+pub 파일 복사하여 ssh and GPG keys를 복사
+
+git clone ssh주소 적음
+
+ssh://git@13.124.42.13
+ssh로 접속하겠는데 git이란 이름의 주소에 접속하겠다.
+git remote add origin ssh://git@13.124.42.13/해당 경로
+
+cd ~
+자신의 홈디렉토리로 감
+.ssh 에 원격 관련 정보 저장되어있음
+ssh-keygen -t rsa
+rsa타입의 ssh-key를 만들겠다.
+
+git pull
+git log --decorate --all --oneline
+깃 모든 브랜치에 대한 정보를 보여줌
+현재 마스터와 동일시됨
+
+git fetch
+git log --decorate --all --oneline
+하면 오리진 마스터가 로컬 마스터를 앞서게 됨
+오리진이 7번 , 로컬이 6번을 가르킴
+즉, 아직 지역 브랜치에는 아무런 영향을 미치지않음
+즉, 원격과 로컬의 병합을 시키지 않아 확인 가능
+git diff HEAD origin/master
+두개 비교가능
+비교후
+git merge origin/master
+로 하면
+이제서야 합쳐짐
+pull과는 다르게 다운 받고 병합은 안함
+
+f와 master 브랜치 있으면
+merge
+git checkout f
+git merge master
+
+rebase
+f의 베이스를 바꾼다 현재 master로
+git checkout feature
+git rebase master
+f 를 master 앞에 둠
+즉, 브랜치를 합침
+히스토리 일렬로 쭉 뻗어나감
+
+특정 브랜치에서
+git rebase master
+수정한 브랜치가 master를 바라보며 위로 일렬로 올라감
+즉, 부모 교체
+git checkout master
+git merge rb
+-> git master 와 rb같아짐
+
+conflict났을때
+충돌난 파일 수정
+git add 해당파일
+git rebase --continue
+또 충돌나면 계속 수정 후
+
+git add -a 1.1.0 -m "bug"
+이름 붙임 가능
+
+git tag -v 1.1.0
+으로 상세 정보 추가가능
+
+git tag 버젼(1.0) master
+태그 새겨줌
+특정 커밋 아이디만 가르킴
+git checkout 1.0과 같은 방식으로 어떤 버젼으로 돌아감 가능
+
+git push --tags
+를 해야 원격저장소의 태그가 올라감
+
+git tag -d 1.1.1
+태그 지움
+
+git tag -a 1.0 -m "first release" master
+와 같이 명시적으로 특정 부분(릴리즈하는 ) 부분에 의미를 줌
+
+마스터 에서 디벨롭을 딴뒤 여기서 작업함
+그런뒤 수정 끝나면 릴리즈 브랜치 따서 수행
+급한건 hotfixes
+
+머지의 기준은 현재 있는곳으로 끌고 오는거
+
+
+

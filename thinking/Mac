@@ -3,3 +3,12 @@ option(alt) + cmd + i
 
 명령창에서 화면 하나 더띄우기
 cmd + t
+
+포트 찾기
+lsof -i :포트번호
+
+포트 죽이기
+kill -9 pid
+
+화면 분할 스플릿 뷰 이용법
+fn+f3

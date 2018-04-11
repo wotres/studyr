@@ -1,0 +1,114 @@
+Neural Machine Translation
+
+Encoder-Decoder
+RNN
+Attention
+
+Encoder
+i don't know .
+각 단어마다 벡터를 하나씩 만듬
+
+Decoder
+모르 -> 겠어요 -> . -> END
+다음 단어 나옴
+하지만 수많은 글자를 동시에 만듦 -> 확률 배당하여 높은 확률로 움직임
+휴리스틱 트리 서치(beam search)를 사용 하여 후보를 제한
+
+Decoder: Attention
+원문과 생성하고 싶은 단어의 연관성을 계산
+연관성 값을 attention weight라고 부름
+
+t-SNE로 벡터 시각화
+고차원 공간의 거리 정보를 저차원 공간에 복원하는 알고리즘
+눈으로 분석할 정도로만 제한
+
+LSTMVis 시각화 기법을 이용
+
+///
+openNMT는
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> 문장 스타일 전형적
+세계인권 선언문
+https://amnesty.or.kr/resource/%EC%84%B8%EA%B3%84%EC%9D%B8%EA%B6%8C%EC%84%A0%EC%96%B8/
+유엔 헌장
+http://www.law.go.kr/%EC%A1%B0%EC%95%BD/%EA%B5%AD%EC%A0%9C%EC%97%B0%ED%95%A9%ED%97%8C%EC%9E%A5%20%EB%B0%8F%20%EA%B5%AD%EC%A0%9C%EC%82%AC%EB%B2%95%EC%9E%AC%ED%8C%90%EC%86%8C%EA%B7%9C%EC%A0%95
+한미 FTA 협정문
+http://www.fta.go.kr/main/situation/kfta/lov5/efta/2/
+법제처
+http://moleg.go.kr/news/notice?pstSeq=43927&pageIndex=2
+
+--> 젤 좋음
+다음 영한사전
+http://alldic.daum.net/search.do?q=%E3%85%87%E3%85%87%E3%85%87&dic=eng&search_first=Y
+네이버 영한사전
+
+영작으로 검색
+--> 어색
+https://quizlet.com/35123390/1000-flash-cards/
+https://www.studystack.com/flashcard-330067
+https://www.90daykorean.com/korean-phrases/#how-to-say-common-korean-phrases
+http://eurolinguiste.com/100-useful-conversational-phrases-words-korean/
+
+
+--> 부드럽게
+https://krdict.korean.go.kr/eng/dicSearch/senseCategory?ParaWordNo=&currentPage=1&nation=eng&blockCount=&searchFlag=Y&lgCategoryCode=1&miCategoryCode=-1
+
+https://www.facebook.com/rapperyootv/posts/172719536256294
+http://www.englishtop.com/book/KE-trans-sample.pdf
+http://www.heykorean.com/hk_club/hk_club_board/hk_club_view.asp?club_id=10004153&board_no=41152&list_no=35&board_type=b&item_seq=1917532&Page=1&Search=&key=&order=&by=desc
+https://yeskorean.com/learn-korean/lesson-19-at-the-restaurant/
+
+
+
+http://wayne.tistory.com/90
+http://dic.impact.pe.kr/ecmaster-cgi/search.cgi?kwd=%B0%A1%B0%DD%C1%A4%C3%A5
+
+
+
+애매한거
+openNMT 크롤링 한거 깃랩 올라가 있음
+
+추천 싸이트
+http://www.sweetandtastytv.com/blog/korean-phrases-for-staying-at-hotels-other-accommodations
+https://www.pdf-archive.com/2017/02/15/korean-phrases/korean-phrases.pdf
+http://reallifelanguage.com/wp-content/uploads/2015/02/Korean-for-Travel-and-Beginners-Phrase-Book.pdf
+
+https://quizlet.com/35123390/1000-flash-cards/
+https://www.facebook.com/bookworm.english/posts/422806951165711
+
+https://ko.wiktionary.org/wiki/%EB%B6%80%EB%A1%9D:%EC%9E%90%EC%A3%BC_%EC%93%B0%EC%9D%B4%EB%8A%94_%ED%95%9C%EA%B5%AD%EC%96%B4_%EB%82%B1%EB%A7%90_5800
+에서
+https://ischool.purunet.com/littledic/littleDicSearchMain.prn?lang=global
+http://www.ybmallinall.com/styleV2/dicview.asp?kwdseq=0&kwdseq2=0&DictCategory=DictEng&DictNum=2&ById=0&PageSize=5&StartNum=0&GroupMode=0&cmd=0&kwd=%EB%A7%8C%EB%82%98%EB%8B%A4&x=0&y=0
+https://www.ldoceonline.com/ko/dictionary/english-korean/meet
+https://ko.glosbe.com/ko/en/%EB%A7%8C%EB%82%98%EB%8B%A4
+
+검색후 예문 추출
+

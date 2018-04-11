@@ -50,3 +50,39 @@ componentWillUnmount -> 컴포넌트가 DOM에서 사라진후 실행
 componentWillUnmount(){
 
 }
+
+
+///
+540 에러
+module.js:540
+    throw err;
+    ^
+
+Error: Cannot find module
+
+node app.js 실행시킬때
+뒤에 이름 잘못 지정해서 나는 에러
+node app 과 같은 식으로 지정해야함
+
+///
+json parse 사용시 에러
+SyntaxError: Unexpected token o in JSON at position 1
+    at JSON.parse (<anonymous>)
+    at Module._compile (module.js:643:30)
+    at Object.Module._extensions..js (module.js:654:10)
+    at Module.load (module.js:556:32)
+    at tryModuleLoad (module.js:499:12)
+    at Function.Module._load (module.js:491:3)
+    at Function.Module.runMain (module.js:684:10)
+    at startup (bootstrap_node.js:187:16)
+
+이미 사용하려는 유형이 json 이라 할필요 없음
+
+///
+언제 exit(0);로 끝내고 언제 exit(1);로 끝내는 건가요?
+보통 문제가 없으면 0을
+문제가 있으면 1을 리턴하도록 작성합니다.
+
+var args = process.argv.slice(2);
+첫 번째 arg는 일반적으로 nodejs의 경로이고 두 번째 arg는 실행중인 스크립트의 위치입니다.
+

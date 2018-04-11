@@ -5,6 +5,11 @@
 이미지
 컨테이너 실행에 필요한 파일과 설정값등을 포함하고 있는 것
 
+Docker 컨테이너는 이미지를 실행한 상태
+이미지로 여러 개의 컨테이너를 만들 수 있움
+운영체제로 보면 이미지는 실행 파일이고 컨테이너는 프로세스
+docker run 으로 이미 실행
+
 dockerfile: 서버구성을 문서화 (정의 및 지정)
 docker build: 도커 이미지 만들기(이미지 생성)
 docker run 옵션: 이미지에 붙이는 옵션(구체적인 정보들을 입력)
@@ -35,6 +40,9 @@ docker rmi[이미지id]
 컨테이너를 삭제하기 전에 이미지를 삭제할 경우
 docker rmi -f[이미지id]
 
+도커 이미지 모두 삭제
+docker rmi $(docker images -q)
+
 도커 컨테이너에 접속하기
 docker exec 명령을 이용
 이때 -it를 입력하여야함
@@ -55,3 +63,14 @@ docker pull <이미지 이름>
 docker restart 컨테이너id
 컨테이너 되살림
 
+도커 컨테이너 삭제시 아래 에러 뜰떄
+Error response from daemon: You cannot remove a running container 컨테이너id. Stop the container before attempting removal or force remove
+docker rm 컨테이너id -f
+와같이 -f 더 적어주면 됨
+
+도커 이미지 삭제시 아래 에러 뜰때
+Error response from daemon: conflict: unable to delete 이미지id (must be forced) - image is referenced in multiple repositories
+docker rmi 이미지id -f
+
+docker run -it --name logstash logstash /bin/bash
+도커 실행 바꿀수 있게 이름은 로그스태쉬 로그스태쉬란 이미지를 안에 들어가서 보겠다.

@@ -243,6 +243,16 @@ git tag -a 1.0 -m "first release" master
 
 머지의 기준은 현재 있는곳으로 끌고 오는거
 
+///
+Cannot rebase: You have unstaged changes.
+
+///
+깃 pull 잘못해서 development 꺼 머지까지 시켜서  filter 브랜치에서 푸쉬하여 커밋 메시지 그전꺼 남았을 경우에
+git rebase -i HEAD~3
+으로 해서 n개의 커밋을 합치거나 지워 주고
+그다음 git rebase development 를 수행
+원래는 development브랜치로 이동후 pull해야함
+하지만 filter 브랜치에서 git pull origin development 를 해버리면서 오류가 난거
 
 
 =======

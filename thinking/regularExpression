@@ -1,0 +1,3 @@
+test()
+reg.test(string)
+찾는 문자열이 있는지를 조사

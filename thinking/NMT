@@ -25,15 +25,85 @@ t-SNE로 벡터 시각화
 LSTMVis 시각화 기법을 이용
 
 ///
-openNMT는
+모델
+기본 인코더는 LSTM or GRU
+
+양방향 인코더 (-encoder_type brnn)
+하나는 정상적인 시퀀스를 인코딩하고 다른 하나는 역순으로 인코딩 하는 방법
+
+피라미드형 깊은 양방향 인코더 (-encoder_type pbbrnn)
+-pdbrnn_reduction 으로 시간 차원을 줄이고
+-pdbrnn_merge 으로 합침
+
+깊은 양방향 인코더 (-encoder_type dbrnn)
+각 레이어으 ㅣ출력이 다음 레이어로 전달되기전 이미 합쳐짐
+피라미드형의 특별한 경우
+
+구글 인코더 (-encoder_type gnmt)
+단일 양방향 레이어가 이는 인코더 이며
+양방향 상태는 연결되고 잔여 연결은 기본적으로 사용됨
+
+컨벌루션 인코더 (-encoder_type cnn)
+시퀀스투시퀀스 모델에서는 연결다리가 없거나 조밀한 연결이있어야함
+Adam(-optim adm -learning_rate 0.0002)이나
+SGD를 이용할떄는 작은 학습률을 설정해야함(-learning_rate 0.1)
+
+디코더
+시퀀스에 주의를 기울이고 다음 입력 단꼐를 위해 과거의 정렬 결정을 말해준다.
+
+잔여연결
+다음 레이어로 공급되기 전에 요소별로 추가됨
+4개이상의 레이어가 있는 RNN 스택 그래디언트 흐름에 유용함
+
+Bridges
+인코더와 디코더 사이의 추가 계층
+인코더 상태가 복사(기본값) -bridge copy
+조밀한 레이어를 통해 gorwaded -bridge dense
+tanh -bridge dense_nonlinear
+인코더 상태는 통과되지 않고 디코더 초기 상태는 0으로 설정 -bridge none
+
+Embeddings
+적은양으로 트레인할떄 미리 만든 임베딩으로 시작해 성능 향상 가능
+-pre_word_vecs_dec 또는
+-pre_word-vecs_enc 로 파일 지정가능
+사전 적제 임베딩은 토지 직렬화 텐서를 사용해야함
+
+retraining
+5000회 반복하고 각 에포크가 끝날때 마다 체크 포인트를 저장함
+-save_every 와 -save_every_epochs 옵션을 이용해 체크포인트를 지정가능
+
+update_vocab <string>
+
+embeddings.lua -> 이미 정의된 사전 등을 추가가능
+
+
+///
+puppeteer
+headless chrome을 쉽게 사용할수 있게 만든 올인원 라이브러리
+Chromium을 다운받아 사용
+
+
+//아이디어
+어순이 다르진않을까?
+
+///
+Neural Machiine Translation - Philipp Koehn논문 정리
+
+hyperbolic tangent (tanh(x)) / logistic function (sigmoid(x)) / Rectified linear unit (relu(x))
+
+///
+LSTM (Long Short-Term Memory models) 은
+RNN (recurrent Nueral Networks) 의 일종
+
+pprint 모듈 : 복잡한 자료구조를 눈으로 보기 쉽게 만들어주는 기능
+pprint.pprint(numbers, width=20, indent=4)
+(너비와 들여쓰기 지정가능)
+pp = pprint.PrettyPrinter(width=20, indent=4)
+pp.pprint(numbers)
 
 
 
-
-
-
-
-
+https://gitlab.sds-act.com/rosamia/omni-crawler/blob/master/pairCorpusCrawler/krdict.en.ko.js
 
 
 

@@ -2,3 +2,13 @@ Error: listen EADDRINUSE :::3000
 포트 중복되어 시작되어 발생
 작업 관리자에서 해당 작업 끝내기
 
+///
+express
+node js 환경에서 동작하는 Web application Framework
+
+body-parser 미들웨어는 페이로드(POST 요청 데이터와 같이 Request message의 body에 담겨 보내진 데이터)를
+request 객체의 body 프로퍼티에 바인딩함
+
+next() 를 사용하면 후속 route handler로 제어를 전달 할 수 있다.
+
+

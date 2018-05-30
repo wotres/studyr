@@ -16,3 +16,77 @@ vi 파일명
 
 cp 파일1 파일 2
 복사
+
+nvidia-smi
+nvidia 현재 사용 현황을 볼 수 있음
+
+/usr/lib/xorg/Xorg 돌고 있을 때
+sudo service lightdm stop
+돌고 있는 lightdm 을 멈춤
+
+sudo kill -9 pid
+해당 포트 멈춤
+
+tail -100f 파일이름
+
+/// 리눅스 마운트 하는법
+df -h
+마운트된 모든 파일 시스템에 대한 정보를 표시
+
+sudo fdisk -l
+파이션된 모든 리스트들 봄
+
+sudo fdisk /dev/sdb
+없는 녀석 파티션 시킴 (sda 없으면 sdb)
+파티션 생성됨
+
+sudo mkfs.ext4 dev/sdb1
+포맷 시킴
+
+sudo blkid
+uuid를 확인
+
+sudo vi /etc/fstab
+fstab 파일에 파티션 추가
+
+/
+루트 폴더로 이동
+
+sudo mkdir /data
+fstab 파일에 정의된 루트 만들어줌
+
+sudo mount -a
+마운트 시킴
+
+cd data
+touch data
+데이타 파일 생성해봄 만약 생성되지않는다면
+권한 이상
+
+sudo chown 이름
+이름으로 권한줌(이 폴더에 파일 생성 가능)
+
+df -h
+확인
+
+///
+:q!
+수정 하지않고 보던거 끝내기
+
+:wq
+저장시키고 보던거 끝내기
+
+///
+vi 에서
+다음 스페이스까지 지우는 법
+d + t + space
+
+한줄 복사
+yyp
+
+지운 한줄 원복
+u
+
+i를 누르게 되면
+insert로 바뀜
+

@@ -1,0 +1,63 @@
+JWT = JSON Web Token
+
+.으로 구분되는 세가지 요소를 가짐
+Header.Payload.Signature
+
+Header
+2가지 속성값 가짐
+alg: 해싱알고리즘 HMAC SHA256 또는 RSA 사용
+typ: 토큰의 타입 = JWT
+{
+    "alg": "HS256",
+    "typ": "JWT"
+}
+
+Payload
+3가지 클레임 으로 구분
+Reserved claims : JWT를 사용함에 있어 권장되는 미리 정의된 클레임 세트(registered)
+- iss : 토큰 발급자 (issuer)
+- sub : 토큰 제목 (subject)
+- aud : 토큰 대상자 (audience)
+- exp : 토큰의 만료시간 (expiraton)
+- nbf : Not Before 토큰의 활성화 날짜 이날짜 지나기전까지는 토큰 처리되지않음
+- iat : 토큰이 발급된 시간 (issued at)
+- jti : JWT의 고유 식별자, 주로 중복처리 방지를 위해 사용
+iss(발행자), exp(만료 시간), sub(주제), aud(고객) 등을 포함
+
+Public claims : JWT 사용자끼리 충돌을 방지하기 위한 값을 포함 / 보통 출돌 방지를 휘한 네임 스페이스를 사용
+
+Private calims : 정보를 담는 클레임
+{
+    "sub":"12345"
+    "name":"Lee"
+    "admin": true
+}
+
+Signature
+인코딩된 헤더, 인코딩된 페이로드, 시크릿 키, 헤더에 지정된 알고리즘을 가짐 -> 무결정 가능
+HMACSHA256(
+    base64UrlEncode(header) + "." +
+    base64UrlEncode(payload),
+    secret)
+
+
+? 계속 생성?
+-> 토큰 생성시 데이터 베이스에서 정보를 가져오면 그다음부터는 데이터 베이스에 질의 하지않아도 됨
+
+Authentication
+
+
+토큰 인증서버는 stateless 서버이다.
+
+stateless 서버?
+상태를 유지하지않음.
+상태정보를 저장하지 않으며 서버는 클라이언트측에서 들어오는 요청만으로만 작업을 처리
+서버의 확장성이 높아짐
+stateful 서버?
+- 클라이언트에게서 요청을 받을 떄 마다, 클라이언트의 상태를 계속해서 유지하고, 이정보를 서비스 제공에 이용
+ex) 세션을 유지하는 웹서버 -> 유저 로그인하면 세션에 로그인 저장한뒤 서비스 제공할때 사용
+
+토큰 시스템은
+유저 로그인 -> 서버에서 계정 검증 -> signed 토큰 발급 -> 토큰과 함께 요청 -> 응답
+
+

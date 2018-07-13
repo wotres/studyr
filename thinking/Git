@@ -268,3 +268,14 @@ If you wish to set tracking information for this branch you can do so with:
 git branch --set-upstream-to=origin/master master
 로컬에 branch가 생성되었으니 그걸 리모트 branch를 추적하게 해줌
 
+
+
+///
+remote origin already exists.
+git remote rm origin 으로 해결
+
+Authentication failed for 'https://github.com/wotres/RNN.git/'
+git init 해봄
+
+git revert 하고 파일 사라질떄
+git reset --hard 1db8598687f376d1b4c67a5f655a094b88b84951

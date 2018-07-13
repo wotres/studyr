@@ -107,3 +107,35 @@ crtl + b + d
 <prefix> + ?
 단축키 목록 보여줌
 
+///
+#!/bin/sh 란 무었인가?
+'#'에 '!'가 연달아 나오는 "#!"는 스크립트를 실행할 쉘을 지정하는 선언문
+ls -al /bin/sh 을 쳐보면
+dash 쉘에 링크 걸고 있음
+dash 가 가벼워서 빠름
+
+chmod 는 리눅스 퍼미션 변경 명령어
+즉, 파일 또는 폴더의 사용권한을 지정하는 리눅스 명령어 이다.
+chmod a+x 대상
+chmod +x 대상
+→ 모든 사용자(a)의 실행(x) 권한 추가(+)
+chmod a-wx 대상
+chmod -wx 대상
+→ 모든 사용자(a)의 쓰기(w), 실행(x) 권한 제거(-)
+chmod u+rw,g-r 대상
+→ 소유자(u)는 rw 추가, 그룹사용자(g)는 r 제거
+
+sh 파일 실행 후 생기는 swn 삭제 는 sh 파일 들어간 후 d
+
+#!/usr/bin/env bash
+
+
+th preprocess.lua -train_src /data/rawdata/number/data/src-train.txt -train_tgt /data/rawdata/number/data/tgt-train.txt \
+-valid_src /data/rawdata/number/data/src-val.txt -valid_tgt /data/rawdata/number/data/tgt-val.txt \
+-save_data /data/rawdata/number/data/number
+
+head -n 10
+상위 10개 보임
+
+tail -f 10
+하위 10개 보임

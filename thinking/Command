@@ -90,3 +90,23 @@ u
 i를 누르게 되면
 insert로 바뀜
 
+////
+파이썬 import 시 오류날때
+/Users/actmember 경로에서
+vi .zshrc 들어간 뒤
+source ~/.bash_profile
+수정
+
+혹은
+
+eval "$(pyenv init -)"
+
+//
+파일 합치고 중복 제거
+for file in data/*
+do
+    cat "$file" >> dnsFull
+done
+sort dnsFull > dnsSorted
+uniq dnsSorted dnsOut
+rm dnsFull dnsSorted

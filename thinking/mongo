@@ -1,0 +1,8 @@
+데이터 베이스 보는법
+show dbs
+
+현재 데이터 베이스 확인
+db
+
+use mongodb_tutorial
+

@@ -110,3 +110,26 @@ done
 sort dnsFull > dnsSorted
 uniq dnsSorted dnsOut
 rm dnsFull dnsSorted
+
+///
+[우분투] APT / APT-GET 차이
+구글링을 하다가 apt 명렁어를 이용하여 패키지를 다운받는 경우를 종종 봤습니다. 처음에는  단순히 apt-get 을 줄여놓은 것으로 생각했었는데 아니더군요.
+사실 apt 와 apt-get 은 다른 패키지 관리자이지만 하는 일이나 명령어들은 거의 비슷합니다. (아예 코드부터가 다릅니다)
+인터페이스는 약간 다릅니다. 그리고 apt-get이 먼저 나오고 apt 가 나중에 나왔습니다.
+apt-get 과 apt-cache 를 하나의 명령어로 사용하기 위해 apt 가 탄생했다더군요.
+결과적으로는 굳이 그 둘을 구분해서 사용하지는 않아도 된다는 것입니다.
+
+apt-get(Advanced Packaging Tool)은 우분투(Ubuntu)를 포함안 데비안(Debian)계열의 리눅스에서 쓰이는 팩키지 관리 명령어 도구입니다. 우분투에는 GUI로 되어 있는시냅틱 꾸러미 관리자도 있기는 하지만 이런 저런 개발관련 패키지를 설치할 때는 커맨드기반인 apt-get이 더 편하기도 합니다. sudo는 superuser권한으로 실행하기 위함입니다.
+
+하위항목에서 파일 찾을때
+find . -name 'App.js'
+대소문자 상관없이 찾을때
+find . -iname 'app.js'
+
+포함된 단어 찾기
+grep -i from *.js
+
+특정 파일이나 폴더를 검사해 특정 검색어가 있는 부분을 출력
+ex)
+find ./ -name '*.htm' | xargs grep -n 'hello'
+-n, --line-number : 문자열이 들어있는 라인과 문두에 라인번호를 출력

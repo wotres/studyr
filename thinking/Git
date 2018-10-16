@@ -279,3 +279,116 @@ git init 해봄
 
 git revert 하고 파일 사라질떄
 git reset --hard 1db8598687f376d1b4c67a5f655a094b88b84951
+
+///
+json.dump() ?
+Python Object (Dictionary, List, Tuple 등) 를 JSON 문자열로 변경하는 것을 JSON Encoding 이라 부른다. JSON 인코딩을 위해서는 우선 json 라이브러리를 import 한 후, json.dumps() 메서드를 써서 Python Object를 문자열로 변환
+
+///
+정규표현식 python re r' (raw string)
+
+re모듈을 사용할 때 패턴을 만들어서 사용할 수 있다.
+
+
+
+패턴을 미리 컴파일하면, 여러 번 재사용할 때 편하기 때문이다.
+
+
+
+패턴을 명시할 때, r 문자를 사용하는 것을 볼 수있다.
+
+ex)
+
+re.compile(r'(\d+)/(\d+)/(\d+)')
+
+
+
+r 문자는 raw string으로 백슬래시 문자를 해석하지 않고 남겨두기 때문에 정규표현식과 같은 곳에 유용하다.
+
+예를 들어 r문자를 사용하지 않는다면
+
+ex)
+
+re.compile('(\\d+)/(\\d+)/(\\d+)')
+
+와 같이 길어 백슬래시를 두 번 사용해야 하는 불편함이 있다. 그래서 보통 r문자를 붙여준다.
+
+
+////
+zip
+zip(iterable*)은 동일한 개수로 이루어진 자료형을 묶어 주는 역할을 하는 함수이다.
+
+잘 이해되지 않는다면 다음 예제를 살펴보자.
+
+>>> list(zip([1, 2, 3], [4, 5, 6]))
+[(1, 4), (2, 5), (3, 6)]
+>>> list(zip([1, 2, 3], [4, 5, 6], [7, 8, 9]))
+[(1, 4, 7), (2, 5, 8), (3, 6, 9)]
+>>> list(zip("abc", "def"))
+[('a', 'd'), ('b', 'e'), ('c', 'f')]
+
+////
+파이썬2 버전에서 3버전으로 판올림 되면서 여러 부분에서 변화가 있었다.
+
+문법들이 달라졌고 동일한 연산에 대한 결과값도 달라지고.. 등등...
+
+
+
+그러나 한 어플리케이션을 만들면서 파이썬2 버전과 3버전에서 동시에 동작하도록
+
+상호호환성을 가지게 만들어 주는 방법이 있어서 기록.
+
+
+
+
+
+__future__ 모듈
+
+
+
+이 모듈은 파이썬2.x 에서 몇몇 기능들을 파이썬3.x 와 같이 사용 가능하게 만들어 주는 모듈이다.
+
+흔히 사용되는 몇몇 기능은 아래와 같다.
+
+
+
+print_function
+
+  >>> print "hello", "world"
+
+  hello world    # python 2.x
+
+  SyntaxError: invalid syntax    # python 3.x
+
+
+
+  >>> print ("hello", "world")
+
+  ("hello", "world")    # python 2.x, 튜플이 출력 됨
+
+  hello world    # python 3.x
+
+
+
+  >>> from __future__ import print_function
+
+  print ("hello", "world")
+
+  hello world    # python 2.x & 3.x, 원하는 출력 가능.
+
+
+
+Division
+
+  >>> from __future__ import division    # python 3 스타일의 나누기 지원.
+
+
+
+Absolute Import
+
+  >>> from __future__ import absolute_import    # 표준 모듈과 동일한 이름의 로컬 모듈을 사용 가능하게 해줌.
+
+///
+명령행 인터페이스(커맨드 라인 인터페이스)에서 명령행 인자를 받아서 실행되는 프로그램의 경우 주어진 인자들을 파싱하는 작업이 필요하다. 여러 가지 방법이 있겠지만 파이썬 3의 표준 라이브러리에 추가된 argparse 모듈을 사용하면 매우 간단하게 명령행 인자 파싱을 할 수 있고, 문법 안내와 헬프 메시지를 자동으로 생성해주어서 매우 편리하다.
+
+argparse는 앞에서 설명했던 대로 파이썬 3에서 새롭게 추가된 모듈이다. 파이썬 2에서 사용할 때에는 pip으로 설치하면 된다.​

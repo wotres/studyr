@@ -1,0 +1,71 @@
+파이썬에서 if __name__ == '__main__': 쓰는 이유
+
+파이썬 코드에서
+if __name__ == '__main__':
+	코드
+와 같은식으로 사용되는 것들이 있다.
+
+이를 쓰는 이유는 실제 실행하는 파일인지 import 를 통해 호출되는 파일인지를 구별하기 위해,
+__name__ 변수를 이용해 이 변수에 들어있는 모듈 이름으로 구분하기 위해서 사용한다.
+
+예를 들면 helloWorld.py를 import 하여 호출하면 __name__ 은 helloWorld 이다
+하지만 파이썬 인터프리터로 스크립트 파일을 직접 실행했을 때는 모듈 이름이 아니라 '__main__'이 들어감
+즉, 이 파일을 직접 실행했을때만 동작하게 하시오 란 뜻으로 시작점을 표시한다고 볼 수 있다.
+파이썬은 스크립트 파일과 모듈의 차이가 없기 때문에 이런 식으로 작성한다.
+
+helloWorld.py 파일에 아래 코드를 입력하고
+print("helloWorld : " + __name__)
+
+동일한 폴더에
+test.py 파일에 아래 코드를 입력한 뒤
+import helloWorld
+print("test : " + __name__)
+
+터미널에서 python test.py 를 실행 시키면
+
+helloWorld : helloWorld
+test : __main__
+
+이 나타난다.
+
+///
+파이썬 배열에 배열 추가 하는 법
+
+파이썬에서 [a] , [b] 로 각각 있는 녀석을 [[a],[b]] 와 같이 만들고 싶을 때가 있다.
+이럴 때에는 아래 코드와 같이 선언하여 append 를 이용하여 추가 하면 된다.
+data = []
+a = [a]
+b = [b]
+data.append(a)
+data.append(b)
+
+즉, 큰 배열 하나 생성 후 append 를 이용해 추가하면 된다.
+
+///
+이중 배열 역순 출력하는 법
+reversed 함수를 쓰면 된다.
+
+data = [[a],[b]]
+를
+[b]
+[a]
+역순으로 출력하고 싶다면 아래 코드와 같이 입력한다.
+
+data = reversed(data)
+for i in data:
+    print(i)
+
+///
+git에 올라간 특정 파일 지우는 법
+
+git을 하다보면 실수로 node_modules 나 불필요한 파일을 올릴떄가 있다
+이럴 떄에는 깃 서버에 있는 파일을 지우고 싶은데 그럴때는 아래와 같이 하면 된다.
+
+1. 원격 저장소에서 commit된 지우고 싶은 파일을 제거한다(폴더 이름 적으면 폴더도 가능)
+git rm -r --cached "지우고 싶은 파일 이름"
+ex) git rm -r -cached node_modules
+2. 위에서 삭제한 히스토리를 로컬 저장소에 commit 한다
+git commit -m "잘못올린 파일 삭제"
+3. 원격 저장소에 푸쉬하여 삭제
+git push origin "원하는 브랜치 명"
+ex) git push origin master

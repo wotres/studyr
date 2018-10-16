@@ -12,3 +12,10 @@ kill -9 pid
 
 화면 분할 스플릿 뷰 이용법
 fn+f3
+
+ip 조회 하는 법
+ifconfig |grep inet
+
+외부 ip 조회
+findip.kr 접속
+

@@ -392,3 +392,14 @@ Absolute Import
 명령행 인터페이스(커맨드 라인 인터페이스)에서 명령행 인자를 받아서 실행되는 프로그램의 경우 주어진 인자들을 파싱하는 작업이 필요하다. 여러 가지 방법이 있겠지만 파이썬 3의 표준 라이브러리에 추가된 argparse 모듈을 사용하면 매우 간단하게 명령행 인자 파싱을 할 수 있고, 문법 안내와 헬프 메시지를 자동으로 생성해주어서 매우 편리하다.
 
 argparse는 앞에서 설명했던 대로 파이썬 3에서 새롭게 추가된 모듈이다. 파이썬 2에서 사용할 때에는 pip으로 설치하면 된다.​
+
+///
+첫 커밋일때 commit 취소 하기
+git update-ref -d HEAD
+///
+you are not allowed to ~~ 나올때 에러
+git reset --soft HEAD@{1}
+git commit -C HEAD@{1}
+
+
+https://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to

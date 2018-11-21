@@ -1,0 +1,68 @@
+using namespace std 를 장려하지 않는 이유
+string 이나 cout 등을 쓸때 앞에
+std:: 를 번거롭게 쓰지않는 방법으로
+using namespace std 를 쓰는것이 있다.
+하지만 이를 권장 안한다는 말이 많은데 그이유는
+
+라이브러리 2개를 호출할 때 같은 메소드가 있는 경우
+예를 들면
+temp1 라이브러리에 fun1()
+temp2 라이브러리에 fun2()
+가 각각 있는경우
+temp1:fun1()
+temp2:fun2()
+와 같은 식으로 쓰지않ㄴ기위해
+using namespace temp1;
+using namespace temp2;
+를 선언한 뒤 간단히
+fun1()
+fun2()
+와 같은식으로 사용이 가능하지만
+temp1에 fun2() 라는 함수가 생겨버리면
+fun2() 는 충돌이 나기때문에
+temp1:fun1()
+temp2:fun2()
+와 같은 식으로 정확한 라이브러리를 언급해주어 충돌을 방지 할 수 있기 때문에 추천하지않는다.
+
+///
+std::cout string int 같이 쓰는 법
+<< 를 이용하여 연결시켜주면된다.
+std::cout << 123 << "가능\n";
+
+
+소수는 1이 아닌 자연수 중에서 1과 자기 자신 이외의 약수를 갖지 않는 수
+
+///
+팁이 루트 n을 이용하여 시간을 반으로 줄인다.
+왜냐하면 소수가 아닌 숫자는 곱셉으로 표시 되는 숫자
+예를 들면 12를 루트를 하지않고 for문을 돌리면 아래와 같은 경우에 검색이 되는데
+2 6, 3 4, 4 3, 6 2
+
+
+#include <iostream>
+#include <math.h>
+// 소수인지 판단
+bool primeNumber(int n){
+    if(n<2){
+        return false;
+    }
+    int num = sqrt(n);
+    for (int i = 2; i<= num; i++){
+        if (n % i ==0){
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int N = 31;
+    bool result = primeNumber(N);
+    if(result){
+        std::cout << "소수\n";
+    } else {
+        std::cout << "소수 아님\n";
+    }
+    return 0;
+}
+

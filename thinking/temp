@@ -225,3 +225,19 @@ arr2 = []
 arr2= list(map(lambda x : x+1, [1,2]))
 print(arr2)
 # print(list(arr2))
+
+
+///
+Called object type 'int' is not a function or function pointer
+오류는 이름이 중복될 떄 일어난다.
+즉, function add 가 아니라 int add 가 되어 일어난다.
+#include <iostream>
+int add(int n){
+    return n+1;
+}
+int main(void){
+    int adds = add(1);
+    std::cout << adds;
+}
+
+받는 변수이름을 다르게 한다.

@@ -1,39 +1,227 @@
-ssh 로 서버 접속하는법
-아래와 같이 호스트 네임과 ip 주소를 @ 를 기준으로 적어주면 접속된다.
-해당 컴퓨터의 호스트네임은 해당 서버에 들어간뒤(직접 로그인 또는 보통은 플젝에서 기록해둔다)
-hostname 이라는 명령어를 치면 나온다.
-> hostname
+malloc 은 memory allocation 의 약자로
+메모리를 사용하기위해 바이트 단위로 메모리 공간을 확보한다.
+그런뒤 예약된 공간에 대한 포인터를 리턴함
 
-> ssh [HOST NAME]@[IP ADDRESS]
+보통 sizeof 연산자를 사용하며
+아래와 같이 4바이트 크기인 int의 크기만큼 메모리를 할당하는등
+개발자가 원할 떄 원하는만큼 동적으로 메모리를 할당 할 수 있다.
+이때 size가 0으로 지정되거나 메모리 할당에 실패하면 리턴 값은 NULL 이다.
+정상적으로는 메모리의 주소 즉, 첫번째 바이트의 주소를 리턴한다.
+ex)
+> std::cout << malloc(sizeof(int));
 
-만약 비밀번호가 있다면
-sshpass -p 옵션을 이용하면된다.
-sshpass -p비밀번호 ssh 아이디@호스트주소
+0x1004563f0
 
-쉘파일 만들어 간단히 실행하는 법
-그리고 매번 할때마다 귀찮을때가 있다.
-이럴때에는 쉘파일을 만들어 실행하는데
-간단히
-touch a.sh
-로 쉘파일을 만들고
-내부에
-sshpass -p비밀번호 ssh 아이디@호스트주소
-를 적어준뒤 저장한다.
-그리고 ./a.sh 로 실행한다.
+근데 malloc 을 할당할 때 어떠한 데이터 형을 저장하는지를 컴퓨터는 모르기 때문에 앞쪽에
+(int*) 과 같은걸 추가해 변환해야한다.
+int* arr = (int*)malloc(sizeof(int));
 
+여기서 중요한게 메모리를 할당했으므로 마지막에 메모리 해제해 줘야한다는 점이다.
+아래와 같이 free 함수를 이용해 메모리를 해제 시켜준다.
+free(arr);
 
-혹시 많은 서버를 접속할때 known_hosts에 등록하기 위해 yes를 일일이 눌러야 할 경우에는
-StrictHostKeyChecking no 라는 옵션을 추가해 known_hosts-file-을 무시한다.
+메모리 해제 안하면 메모리 사용량이 계속 증가하는 메모리 누수가 일어난다.
 
-sshpass -p비밀번호 ssh -o StrictHostKeyChecking no 아이디@호스트주소
+또한 arr = NULL 을 통해 바라보것을 NULL 로 바꾸어 주어 다시 호출되는 문제를 막아준다.
+댕글링 포인터 문제라고 치면 잘나온다.
+
+//
+Cannot initialize a variable of type 'int' with an rvalue of type 'void *' 에러 해결법
+아래와 같은 코드를 실행할 때
+Cannot initialize a variable of type 'int' with an rvalue of type 'void *' 와같은 에러가 뜨는 경우가 있다.
+이럴때에는
+알맞지않은 타입의 형식에 변수를 입력하려고 해서 나는 오류인데 타입을 앞에 맞춰 적어주면 된다.
+int temp = malloc(sizeof(int));
+
+int* temp = (int*)malloc(sizeof(int));
+
+Cast from pointer to smaller type 'int' loses information
+
+//
+free() 로 지웠는데 호출되는 문제
+댕글링 포인터 문제
+
+#include <iostream>
+
+int main(){
+    int* temp = (int*)malloc(sizeof(int));
+    temp[1] = 1;
+    std::cout << temp[1] << "\n";
+
+    if(temp){
+        std::cout << "here\n";
+        free(temp);
+    };
+    std::cout << temp[1] << "\n";
+
+    return 0;
+}
+
+지웠지만 호출됨 http://grindawayat.blogspot.com/2015/05/free-null-dangling-pointer.html
+
+#include <iostream>
+int main(){
+    int* temp = (int*)malloc(sizeof(int));
+    temp[1] = 1;
+    std::cout << temp[1] << "\n";
+
+    if(temp){
+        free(temp);
+        std::cout << "hi\n";
+        temp = NULL;
+    };
+    std::cout << temp[1] << "\n";
+    return 0;
+}
+
+사용못하게 막음!
+
+///
+# requests 를 이용하여 소스 크롤링
+# pip install requests 로 간단 설치
+import requests
+# requests.get('주소') 를 통해 해당 주소 정보 호출
+req = requests.get('https://beomi.github.io/beomi.github.io_old/')
+# 정상호출 <Response [200]>
+# print(req)
+# 많은 정보를 내포 , header 정보 가져오려면
+headers = req.headers
+# print(headers)
+# req.test 를 통해 HTML 관련 소스 가져옴
+html = req.text
+# print(html)
+# 정상호출인지 아닌지 판단
+status = req.status_code
+print(status)
+# 정상이면 200
+
+# 쉽게 크롤링 가능 하지만... 문자열 형태의 반환이라 가공하기 어려움
+# 정보를 더 추출하고 싶다면 BeautifulSoup 를 이용해야함
 
 
 ///
-원하는 파일명 경로 찾기
-find . -name "rnn*.txt"
+# Beautiful Soup(뷰티플 수프) 사용법과 예제
+# pip install bs4
+# file import
+import requests
+from bs4 import BeautifulSoup
 
-원하는 파일에서 원하는 문자 찾기
-find . -name "*" | xargs grep -n "rnn"
+req = requests.get('http://beomi.github.io/beomi.github.io_old/')
+html = req.text
+# BeautifulSoup 'html.parser'를 통해 python 객체 형식으로 변환 시킨다.
+soup = BeautifulSoup(html, 'html.parser')
+# print(soup)
+# 이제 원하는 데이터를 soup.select를 통해 css Selector를 이용하듯이 불러올 수 잇다.
+# soup 객체들의 리스트임
+# 1. h3 태그들 가져오기
+h3 = soup.select('h3')
+print(h3)
 
-xargs의 역할
-위의 명령문 예시와 같은 경우에 xargs는 파이프를 통해 넘어온 find명령의 결과물을 다음 명령어에 매개변수로 던져주는 역할을 한다.
+# 2. h3 아래의 a를 불러온다.
+a = soup.select('h3 > a')
+print(a)
+
+#
+for i in a:
+    # tag안의 텍스트 가져옴
+    # print(i.text)
+    # get 으로 속성 가져옴
+    print(i.get('href'))
+
+
+#
+콘다에서 jpype 에러 해결법
+ImportError: No module named 'jpype1'
+
+pip install jpype1 해도 안됨
+
+이럴때는 콘다에서 강제로 설치해버리자
+conda install -c conda-forge jpype1
+
+성공!
+
+###
+ 소수인지 판단
+bool primeNumber(int n){
+    if(n<2){
+        return false;
+    }
+    int num = sqrt(n);
+    for (int i = 2; i<= num; i++){
+        if (n % i ==0){
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int N = 31;
+    bool result = primeNumber(N);
+    if(result){
+        std::cout << "소수\n";
+    } else {
+        std::cout << "소수 아님\n";
+    }
+    return 0;
+}
+
+
+### 에라토스테네스의 체
+#include <iostream>
+
+// 에라토스테네스의 체 알고리즘
+// N이라는 숫자가 주어졌을 때 N보다 작은 소수들을 구하라
+void getPrimeNumber(int n){
+    int* arr = (int*)malloc(sizeof(int));
+    for (int i = 2; i <= n; i++){
+        arr[i] = i;
+    }
+
+    for (int i = 2; i <= n; i++){
+        if(arr[i] == 0){
+            continue;
+        }
+        for(int j = i*2; j <=n; j+=i){
+            arr[j] = 0;
+        }
+    }
+
+    for (int i = 2; i<=n; i++){
+        if (arr[i] != 0){
+            std::cout << arr[i] << " ";
+        }
+    }
+}
+
+int main() {
+    int N = 10;
+    getPrimeNumber(N);
+    return 0;
+}
+
+///
+람다(lamda) 함수 설명
+
+람다함수는 한줄로 함수를 작성하는 방법이다.
+예를 들면 1 더하기 함수 add 를 만들면
+def add(x):
+    return x + 1
+과 같이 된다.
+그리고 값을 여러개를 집어 넣으면
+add(1)
+add(2) 와 같은 식으로 집어넣어야하지만
+이를 람다함수로 바꾸면
+arr = lambda x: x+1, [1,2]
+와 같은 식을 ㅗ쉽게 변환이 가능하다.
+lambda 뒤에는 매개변수, : 뒤에는 구해야하는 함수, , 뒤에는 들어갈 값 으로 분리된다.
+
+def add(x):
+    return x+1
+arr = []
+arr = list(map(add,[1,2]))
+print(arr)
+arr2 = []
+arr2= list(map(lambda x : x+1, [1,2]))
+print(arr2)
+# print(list(arr2))
